@@ -1,396 +1,232 @@
-""""""""""""""""""
-"""   .vimrc   """
-""""""""""""""""""
-if !empty(&viminfo)
-    set viminfo='50,<1000,s100,\"50,! " YankRing用に!を追加
-endif
-set shellslash              " Windowsでディレクトリパスの区切り文字に / を使えるようにする
-set lazyredraw              " マクロなどを実行中は描画を中断
-set complete+=k             " 補完に辞書ファイル追加
-set history=500
-if has('unix')
-    let $LANG = "C"
-else
-    let $LANG = "en"
-endif
-execute "language " $LANG
-execute "set langmenu=".$LANG
-let mapleader = "\<Space>"
-let maplocalleader = "\\"
-set timeout timeoutlen=1000 ttimeoutlen=10
-
-" タブ周り
-" tabstopはTab文字を画面上で何文字分に展開するか
-" shiftwidthはcindentやautoindent時に挿入されるインデントの幅
-" softtabstopはTabキー押し下げ時の挿入される空白の量，0の場合はtabstopと同じ，BSにも影響する
-set tabstop=4 shiftwidth=4 softtabstop=0
-set expandtab              " タブを空白文字に展開
-"set noautoindent nosmartindent " 自動インデント，スマートインデント
-
-" 入力補助
-set backspace=indent,eol,start " バックスペースでなんでも消せるように
-set formatoptions+=m           " 整形オプション，マルチバイト系を追加
-
-" コマンド補完
-set wildmenu           " コマンド補完を強化
-set wildmode=longest,list,full " リスト表示，最長マッチ
-
-" 検索関連
-set wrapscan   " 最後まで検索したら先頭へ戻る
-set ignorecase " 大文字小文字無視
-set smartcase  " 大文字ではじめたら大文字小文字無視しない
-set incsearch  " インクリメンタルサーチ
-set hlsearch   " 検索文字をハイライト
-
-" ファイル関連
-set nobackup   " バックアップ取らない
-set autoread   " 他で書き換えられたら自動で読み直す
-set noswapfile " スワップファイル作らない
-set hidden     " 編集中でも他のファイルを開けるようにする
-
-" ビープ音除去
-set vb t_vb=
-
-" tags
-if has('path_extra')
-  setglobal tags-=./tags tags-=./tags; tags^=./tags;
-endif
-
-"表示関連
-set showmatch         " 括弧の対応をハイライト
-set showcmd           " 入力中のコマンドを表示
-"set number            " 行番号表示
-set wrap              " 画面幅で折り返す
-"set list              " 不可視文字表示
-"set listchars=tab:>  " 不可視文字の表示方法
-set notitle           " タイトル書き換えない
-set scrolloff=5       " 行送り
-
-" ステータスライン関連
-set laststatus=2
-set statusline=%-(%f%m%h%r%w%)%=%{&ff}\|%{&fenc}\ %y%l,%c\ %0P
-
-" ウィンドウ関連
-set splitbelow
-set splitright
-
-" 補完
-set completeopt=longest,menuone,preview
-
-
-" ==================== カラー ==================== "
-colorscheme default          " カラースキーム
-syntax on " シンタックスカラーリングオン
-filetype indent on " ファイルタイプによるインデントを行う
-filetype plugin on " ファイルタイプごとのプラグインを使う
-" ポップアップメニューの色変える
-"highlight Pmenu ctermbg=lightcyan ctermfg=black
-"highlight PmenuSel ctermbg=blue ctermfg=black
-"highlight PmenuSbar ctermbg=darkgray
-"highlight PmenuThumb ctermbg=lightgray
-highlight Comment ctermfg=blue
-
-" 行番号のハイライト
-set cursorline
-highlight clear CursorLine
-
-autocmd WinEnter    * set cursorline
-autocmd WinLeave    * set nocursorline
-autocmd InsertEnter * set nocursorline
-autocmd InsertLeave * set cursorline
-
-" ==================== カーソル ==================== "
-let &t_SI .= "\<Esc>[5 q"
-let &t_EI .= "\<Esc>[1 q"
-if (v:version == 704 && has('patch687')) || v:version >= 705
-    let &t_SR .= "\<Esc>[3 q"
-endif
-
-" ==================== エンコーディング関連 ==================== "
 set encoding=utf-8
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932,sjis
-set fileformats=unix,dos,mac
+scriptencoding utf-8
+" ↑1行目は読み込み時の文字コードの設定
+" ↑2行目はVim Script内でマルチバイトを使う場合の設定
+" Vim scritptにvimrcも含まれるので、日本語でコメントを書く場合は先頭にこの設定が必要になる
 
+"----------------------------------------------------------
+" NeoBundle
+"----------------------------------------------------------
+if has('vim_starting')
+    " 初回起動時のみruntimepathにNeoBundleのパスを指定する
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-" ==================== キーマップ ==================== "
-" 表示行単位で移動
-noremap j gj
-noremap k gk
-vnoremap j gj
-vnoremap k gk
-
-" undo behavior
-inoremap <BS> <C-g>u<BS>
-inoremap <CR> <C-g>u<CR>
-inoremap <DEL> <C-g>u<DEL>
-inoremap <C-w> <C-g>u<C-w>
-
-" Emacs style
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
-" function key
-imap <F1>  <Esc><F1>
-imap <F2>  <Esc><F2>
-imap <F3>  <Esc><F3>
-imap <F4>  <Esc><F4>
-imap <F5>  <Esc><F5>
-imap <F6>  <Esc><F6>
-imap <F7>  <Esc><F7>
-imap <F8>  <Esc><F8>
-imap <F9>  <Esc><F9>
-imap <F10> <Esc><F10>
-imap <F11> <Esc><F11>
-imap <F12> <Esc><F12>
-cmap <F1>  <Esc><F1>
-cmap <F2>  <Esc><F2>
-cmap <F3>  <Esc><F3>
-cmap <F4>  <Esc><F4>
-cmap <F5>  <Esc><F5>
-cmap <F6>  <Esc><F6>
-cmap <F7>  <Esc><F7>
-cmap <F8>  <Esc><F8>
-cmap <F9>  <Esc><F9>
-cmap <F10> <Esc><F10>
-cmap <F11> <Esc><F11>
-cmap <F12> <Esc><F12>
-
-" ハイライト消す
-nmap <silent> gh :nohlsearch<CR>
-
-"noremap ^? <Del>
-
-" コピー
-nnoremap Y y$
-
-" インクリメント設定
-noremap + <C-a>
-noremap - <C-x>
-
-vmap ,y "+y
-vmap ,d "+d
-nmap ,p "+p
-nmap ,P "+P
-vmap ,p "+p
-vmap ,P "+P
-
-
-" xはレジスタに登録しない
-nnoremap x "_x
-
-if &term == "screen"
-    map <esc>[1;5D <C-Left>
-    map <esc>[1;5C <C-Right>
-endif
-
-" Enable metakey
-"execute "set <M-p>=\ep"
-"execute "set <M-n>=\en"
-
-" move buffer
-nnoremap <F2> :bprev<CR>
-nnoremap <F3> :bnext<CR>
-
-" move tab
-nnoremap <S-F2> gT
-nnoremap <S-F3> gt
-
-nnoremap <F4> :bdelete<CR>
-nnoremap <F5> <C-l>
-
-" move changes
-nnoremap <F10> g;
-nnoremap <F11> g,
-
-" change paragraph
-nnoremap ( {
-nnoremap ) }
-
-" For search
-nnoremap v/ /\v
-vnoremap * y/<C-R>"<CR>
-vnoremap z/ <ESC>/\%V
-vnoremap z? <ESC>?\%V
-
-" For replace
-nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
-
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-endif
-
-" Undoable<C-w> <C-u>
-inoremap <C-w> <C-g>u<C-w>
-inoremap <C-u> <C-g>u<C-u>
-
-" Change current directory
-nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
-
-" Delete buffer
-nnoremap ,bd :bdelete<CR>
-
-" Delete all marks
-nnoremap ,md :delmarks!<CR>
-
-" Change encoding
-nnoremap ,u :e ++enc=utf-8<CR>
-nnoremap ,s :e ++enc=cp932<CR>
-nnoremap ,e :e ++enc=euc-jp<CR>
-nnoremap ,j :e ++enc=iso-2022-jp<CR>
-
-" tags jump
-nnoremap <C-]> g<C-]>
-
-" search continue
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
-
-" edit macro
-nnoremap ,me  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-
-" visual shift
-xnoremap <  <gv
-xnoremap >  >gv
-
-" completion
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-.
-" split gf
-nnoremap <C-w>F :vertical wincmd f<CR>
-
-" ==================== command ==================== "
-" change indent
-command! -nargs=1 IndentChange set tabstop=<args> shiftwidth=<args>
-
-
-" ==================== autocmd ==================== "
-if has('autocmd')
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-    autocmd!
-    " 前回終了したカーソル行に移動
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-    " ======== Undo ======== "
-    " アンドゥ
-    if has('persistent_undo')
-      set undodir=./.vimundo,~/.vim/vimundo
-      autocmd BufRead ~/* setlocal undofile
+    " NeoBundleが未インストールであればgit cloneする
+    if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+        echo "install NeoBundle..."
+        :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
     endif
-  augroup END
-  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
-  autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 endif
 
-" ======== 貼り付け設定 ======== "
-if &term =~ "xterm" || &term =~ "screen"
-    let &t_SI .= "\<Esc>[?2004h"
-    let &t_EI .= "\<Esc>[?2004l"
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-    function! XTermPasteBegin(ret)
-        set pastetoggle=<f29>
+" インストールするVimプラグインを以下に記述
+" NeoBundle自身を管理
+NeoBundleFetch 'Shougo/neobundle.vim'
+" カラースキームmolokai
+NeoBundle 'tomasr/molokai'
+" ステータスラインの表示内容強化
+NeoBundle 'itchyny/lightline.vim'
+" インデントの可視化
+NeoBundle 'Yggdroot/indentLine'
+" 末尾の全角半角空白文字を赤くハイライト
+NeoBundle 'bronson/vim-trailing-whitespace'
+" 構文エラーチェック
+NeoBundle 'scrooloose/syntastic'
+" 多機能セレクタ
+NeoBundle 'ctrlpvim/ctrlp.vim'
+" CtrlPの拡張プラグイン. 関数検索
+NeoBundle 'tacahiroy/ctrlp-funky'
+" CtrlPの拡張プラグイン. コマンド履歴検索
+NeoBundle 'suy/vim-ctrlp-commandline'
+" CtrlPの検索にagを使う
+NeoBundle 'rking/ag.vim'
+" プロジェクトに入ってるESLintを読み込む
+NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+
+" vimのlua機能が使える時だけ以下のVimプラグインをインストールする
+if has('lua')
+    " コードの自動補完
+    NeoBundle 'Shougo/neocomplete.vim'
+    " スニペットの補完機能
+    NeoBundle "Shougo/neosnippet"
+    " スニペット集
+    NeoBundle 'Shougo/neosnippet-snippets'
+endif
+
+call neobundle#end()
+
+" ファイルタイプ別のVimプラグイン/インデントを有効にする
+filetype plugin indent on
+
+" 未インストールのVimプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
+NeoBundleCheck
+
+"----------------------------------------------------------
+" カラースキーム
+"----------------------------------------------------------
+if neobundle#is_installed('molokai')
+    colorscheme molokai " カラースキームにmolokaiを設定する
+endif
+
+set t_Co=256 " iTerm2など既に256色環境なら無くても良い
+syntax enable " 構文に色を付ける
+
+"----------------------------------------------------------
+" 文字
+"----------------------------------------------------------
+set fileencoding=utf-8 " 保存時の文字コード
+set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
+set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
+set ambiwidth=double " □や○文字が崩れる問題を解決
+
+"----------------------------------------------------------
+" ステータスライン
+"----------------------------------------------------------
+set laststatus=2 " ステータスラインを常に表示
+set showmode " 現在のモードを表示
+set showcmd " 打ったコマンドをステータスラインの下に表示
+set ruler " ステータスラインの右側にカーソルの位置を表示する
+
+"----------------------------------------------------------
+" コマンドモード
+"----------------------------------------------------------
+set wildmenu " コマンドモードの補完
+set history=5000 " 保存するコマンド履歴の数
+
+"----------------------------------------------------------
+" タブ・インデント
+"----------------------------------------------------------
+set expandtab " タブ入力を複数の空白入力に置き換える
+set tabstop=4 " 画面上でタブ文字が占める幅
+set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent " 改行時に前の行のインデントを継続する
+set smartindent " 改行時に前の行の構文をチェックし次の行のインデントを増減する
+set shiftwidth=4 " smartindentで増減する幅
+
+"----------------------------------------------------------
+" 文字列検索
+"----------------------------------------------------------
+set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
+set ignorecase " 検索パターンに大文字小文字を区別しない
+set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch " 検索結果をハイライト
+
+" ESCキー2度押しでハイライトの切り替え
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+"----------------------------------------------------------
+" カーソル
+"----------------------------------------------------------
+set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
+set number " 行番号を表示
+set cursorline " カーソルラインをハイライト
+
+" 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
+nnoremap j gj
+nnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
+
+" バックスペースキーの有効化
+set backspace=indent,eol,start
+
+"----------------------------------------------------------
+" カッコ・タグの対応
+"----------------------------------------------------------
+set showmatch " 括弧の対応関係を一瞬表示する
+source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
+
+"----------------------------------------------------------
+" マウスでカーソル移動とスクロール
+"----------------------------------------------------------
+if has('mouse')
+    set mouse=a
+    if has('mouse_sgr')
+        set ttymouse=sgr
+    elseif v:version > 703 || v:version is 703 && has('patch632')
+        set ttymouse=sgr
+    else
+        set ttymouse=xterm2
+    endif
+endif
+
+"----------------------------------------------------------
+" クリップボードからのペースト
+"----------------------------------------------------------
+" 挿入モードでクリップボードからペーストする時に自動でインデントさせないようにする
+if &term =~ "xterm"
+    let &t_SI .= "\e[?2004h"
+    let &t_EI .= "\e[?2004l"
+    let &pastetoggle = "\e[201~"
+
+    function XTermPasteBegin(ret)
         set paste
         return a:ret
     endfunction
 
-    execute "set <f28>=\<Esc>[200~"
-    execute "set <f29>=\<Esc>[201~"
-    "map <expr> <f28> XTermPasteBegin("i")
-    imap <expr> <f28> XTermPasteBegin("<C-g>u")
-    "vmap <expr> <f28> XTermPasteBegin("c")
-    cmap <f28> <nop>
-    cmap <f29> <nop>
+    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
-" ======== Mouse Setting ======== "
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=""
-  " For screen.
-  if &term =~ "^screen"
-    augroup MyAutoCmd
-      autocmd!
-      autocmd VimLeave * :set mouse=
-    augroup END
+"----------------------------------------------------------
+" neocomplete・neosnippetの設定
+"----------------------------------------------------------
+if neobundle#is_installed('neocomplete.vim')
+    " Vim起動時にneocompleteを有効にする
+    let g:neocomplete#enable_at_startup = 1
+    " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
+    let g:neocomplete#enable_smart_case = 1
+    " 3文字以上の単語に対して補完を有効にする
+    let g:neocomplete#min_keyword_length = 3
+    " 区切り文字まで補完する
+    let g:neocomplete#enable_auto_delimiter = 1
+    " 1文字目の入力から補完のポップアップを表示
+    let g:neocomplete#auto_completion_start_length = 1
+    " バックスペースで補完のポップアップを閉じる
+    inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 
-    " screenでマウスを使用するとフリーズするのでその対策
-    set ttymouse=xterm2
-  endif
-
-  if has('gui_running')
-    set mouse=a
-    " Show popup menu if right click.
-    set mousemodel=popup
-    " Don't focus the window when the mouse pointer is moved.
-    set nomousefocus
-    " Hide mouse pointer on insert mode.
-    set mousehide
-  endif
+    " エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定
+    imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+    " タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
+    imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 endif
 
-" ==================== コード整形 ==================== "
-"末尾の空白をハイライトする
-"augroup HighlightTrailingSpaces
-"  autocmd!
-"  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
-"  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
-"augroup END
+"----------------------------------------------------------
+" Syntastic
+"----------------------------------------------------------
+" 構文エラー行に「>>」を表示
+let g:syntastic_enable_signs = 1
+" 他のVimプラグインと競合するのを防ぐ
+let g:syntastic_always_populate_loc_list = 1
+" 構文エラーリストを非表示
+let g:syntastic_auto_loc_list = 0
+" ファイルを開いた時に構文エラーチェックを実行する
+let g:syntastic_check_on_open = 1
+" 「:wq」で終了する時も構文エラーチェックする
+let g:syntastic_check_on_wq = 1
 
-if v:version >= 703
-    noremap <Plug>(ToggleColorColumn)
-            \ :<c-u>let &colorcolumn = len(&colorcolumn) > 0 ? '' :
-            \   join(range(81, 9999), ',')<CR>
-    nmap cc <Plug>(ToggleColorColumn)
-else
-    function! ToggleOldColorColumn(m)
-        if a:m != 0
-            let l:m = matchdelete(a:m)
-        else
-            let l:m = matchadd('turn', '^.\{80\}\zs.\+\ze')
-        endif
-        return l:m
-    endfunction
-    highlight turn gui=standout cterm=standout
-    let m = 0
-    nmap cc :let m = ToggleOldColorColumn(m)<CR>
+" Javascript用. 構文エラーチェックにESLintを使用
+let g:syntastic_javascript_checkers=['eslint']
+" Javascript以外は構文エラーチェックをしない
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': ['javascript'],
+                           \ 'passive_filetypes': [] }
+
+"----------------------------------------------------------
+" CtrlP
+"----------------------------------------------------------
+let g:ctrlp_match_window = 'order:ttb,min:20,max:20,results:100' " マッチウインドウの設定. 「下部に表示, 大きさ20行で固定, 検索結果100件」
+let g:ctrlp_show_hidden = 1 " .(ドット)から始まるファイルも検索対象にする
+let g:ctrlp_types = ['fil'] "ファイル検索のみ使用
+let g:ctrlp_extensions = ['funky', 'commandline'] " CtrlPの拡張として「funky」と「commandline」を使用
+
+" CtrlPCommandLineの有効化
+command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
+
+" CtrlPFunkyの絞り込み検索設定
+let g:ctrlp_funky_matchtype = 'path'
+
+if executable('ag')
+  let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
+  let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
 endif
-
-" ==================== コピー共有 ==================== "
-"クリップボード共有
-if has('clipboard')
-    if v:version >= 703
-        set clipboard=unnamedplus,unnamed
-    else
-        set clipboard+=unnamed
-    endif
-endif
-
-" ======== undo ======== "
-if has('persistent_undo')
-  set undodir=~/.vim/undo
-  augroup vimrc-undofile
-    autocmd!
-    autocmd BufReadPre ~/* setlocal undofile
-  augroup END
-endif
-
-" ======== matchit.vim ======== "
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
-
-
-" ==================== Local Configuration ==================== "
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
-
-
-
