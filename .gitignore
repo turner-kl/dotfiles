@@ -9,6 +9,7 @@
 !/.bash_profile
 !/.dircolors
 !/.inputrc
+!/.zshrc
 # vim setting file
 !/.vim/
 !/.vimrc

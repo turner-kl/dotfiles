@@ -23,3 +23,7 @@ done
 ```
 zstyle ':prezto:module:prompt' theme 'pure'
 ```
+
+"" Mac環境構築  
+1.Homebrewをインストール  
+
