@@ -1,3 +1,9 @@
+# brew
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+# anyenv
+eval "$(anyenv init -)"
+
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -8,5 +14,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# anyenv
-eval "$(anyenv init -)"
+# alias
+alias ll='ls -al'
+alias g='git'
