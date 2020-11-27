@@ -10,6 +10,7 @@
 !/.dircolors
 !/.inputrc
 !/.zshrc
+!/.zpreztorc
 # vim setting file
 !/.vim/
 !/.vimrc
