@@ -1,7 +1,7 @@
 # dotfile使い方
 - dotfilesの.zshrcにシンボリックリンクを貼る 
 ```
-ln -s ~/workspace/dotfiles/.zshrc ~
+ln -s ~/workspace/dotfiles/.zshrc ~/.zshrc
 ```
 
 - 削除
