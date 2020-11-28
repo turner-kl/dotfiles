@@ -105,7 +105,8 @@ pyenv global 3.9.0
 
 ## aws-cli
 ```
-pip3 install awscli --upgrade
+pip install awscli --upgrade
+pip install aws-sam-cli
 ```
 
 ## Git
