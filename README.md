@@ -122,3 +122,19 @@ git secrets --register-aws --global
 git secrets --install ~/.git-templates/git-secrets
 git config --global init.templatedir '~/.git-templates/git-secrets'
 ```
+
+## zip
+```
+sudo apt install zip
+```
+
+## Java
+- sdkman
+```
+curl -s https://get.sdkman.io | bash
+```
+
+- java 
+```
+sdk install java
+```
