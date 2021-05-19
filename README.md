@@ -62,24 +62,24 @@ https://qiita.com/kuangyujing/items/08d0fb01732bf67b8704
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
 
-## Node.js
-- nodenv
+## Anyenv
 ```
 brew install anyenv
+mkdir -p $(anyenv root)/plugins
+git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+```
+
+### Node.js
+```
 anyenv install nodenv
 ```
 
 - default packages  
-npm インストール時にデフォルトでインストールするパッケージを指定  
 ```
-mkdir -p $(anyenv root)/plugins
-git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 mkdir -p "$(nodenv root)"/plugins
 git clone https://github.com/nodenv/nodenv-default-packages.git "$(nodenv root)/plugins/nodenv-default-packages"
 touch $(nodenv root)/default-packages
 ```
-
-- default-packagesの中身は下記
 ```
 yarn
 typescript
@@ -93,17 +93,26 @@ nodenv install 14.4.0
 nodenv global 14.4.0
 ```
 
-## Python
+### Python
 ```
 anyenv install pyenv
-sudo apt-get install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev
-sudo apt-get install libffi-dev
-pyenv install -l
+pyenv install -l # インストール可能なリスト
 pyenv install 3.9.0
 pyenv global 3.9.0
 ```
 
-## aws-cli
+- default packages  
+```
+git clone https://github.com/jawshooah/pyenv-default-packages.git $(pyenv root)/plugins/pyenv-default-packages
+vim $(pyenv root)/default-packages
+```
+```
+awscli
+aws-sam-cli
+``` 
+
+
+## AWS CLI
 ```
 pip install awscli --upgrade
 pip install aws-sam-cli
