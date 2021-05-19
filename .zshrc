@@ -5,8 +5,6 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 eval "$(anyenv init -)"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Source Prezto
