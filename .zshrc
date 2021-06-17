@@ -5,8 +5,6 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 eval "$(anyenv init -)"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Source Prezto
@@ -18,3 +16,7 @@ fi
 alias ll='ls -al'
 alias g='git'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|build|dist|cache|coverage|\.nyc_output|vendor\/bundle" -N'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

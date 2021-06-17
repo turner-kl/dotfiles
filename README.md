@@ -1,16 +1,23 @@
 # dotfile使い方
-dotfilesの.zshrcにシンボリックリンクを貼る 
+- dotfilesの.zshrcにシンボリックリンクを貼る 
 ```
-ln -s ~/workspace/dotfiles/.zshrc ~
+ln -s ~/workspace/dotfiles/.zshrc ~/.zshrc
+```
+
+- 削除
+```
+unlink ~/.zshrc
 ```
 
 ## zsh
 ### Prezto
+zshrcが存在するとエラーとなるため、dotfilesを使用する前に下記を実行し、後からリンクを貼る。  
 https://github.com/sorin-ionescu/prezto  
 1. Installation  
 ```
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 ```
+
 2. Create a new Zsh configuration by copying the Zsh configuration files provided:
 ```
 setopt EXTENDED_GLOB
@@ -23,11 +30,16 @@ done
 ```
 zstyle ':prezto:module:prompt' theme 'pure'
 ```
+あるいはリンク
+```
+ln -s ~/workspace/dotfiles/.zpreztorc ~
+```
 
 # Mac環境構築  
 1.Homebrewをインストール  
 
 # Windows環境構築
+dotfileのシンボリックリンクを設定する前に、zpreztoを設定する。
 ## WSL2
 - WSL2(Windows Subsystem for Linux)導入手順   
 https://qiita.com/kenchan1193/items/74edfc67910b51469b45
@@ -93,7 +105,8 @@ pyenv global 3.9.0
 
 ## aws-cli
 ```
-pip3 install awscli --upgrade
+pip install awscli --upgrade
+pip install aws-sam-cli
 ```
 
 ## Git
@@ -108,4 +121,20 @@ brew install git-secrets
 git secrets --register-aws --global
 git secrets --install ~/.git-templates/git-secrets
 git config --global init.templatedir '~/.git-templates/git-secrets'
+```
+
+## zip
+```
+sudo apt install zip
+```
+
+## Java
+- sdkman
+```
+curl -s https://get.sdkman.io | bash
+```
+
+- java 
+```
+sdk install java
 ```

@@ -11,6 +11,7 @@
 !/.inputrc
 !/.zshrc
 !/.zpreztorc
+!/.zprofile
 # vim setting file
 !/.vim/
 !/.vimrc
