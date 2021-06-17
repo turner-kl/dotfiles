@@ -17,3 +17,4 @@ fi
 # alias
 alias ll='ls -al'
 alias g='git'
+alias tree='tree -a -I "\.DS_Store|\.git|node_modules|build|dist|cache|coverage|\.nyc_output|vendor\/bundle" -N'
