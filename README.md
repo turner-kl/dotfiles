@@ -57,6 +57,10 @@ https://qiita.com/mtsgi/items/8a844870f30b30ef21e4
 - Windows TerminalでWSLのデフォルトのディレクトリを設定する   
 https://qiita.com/kuangyujing/items/08d0fb01732bf67b8704
 
+## tmux
+```
+brew install tmux
+```
 
 ## Docker
 - Windows 10 Home で WSL 2 + Docker を使う  
@@ -70,8 +74,11 @@ git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv
 ```
 
 ### Node.js
+- Node.js
 ```
 anyenv install nodenv
+nodenv install 14.4.0
+nodenv global 14.4.0
 ```
 
 - default packages  
@@ -86,12 +93,6 @@ typescript
 tsnode
 typesync
 ``` 
-
-- Node.js
-```
-nodenv install 14.4.0
-nodenv global 14.4.0
-```
 
 ### Python
 ```
