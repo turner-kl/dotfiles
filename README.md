@@ -107,11 +107,6 @@ pyenv global 3.9.0
 git clone https://github.com/jawshooah/pyenv-default-packages.git $(pyenv root)/plugins/pyenv-default-packages
 vim $(pyenv root)/default-packages
 ```
-```
-awscli
-aws-sam-cli
-``` 
-
 
 ## AWS CLI
 ```
@@ -149,7 +144,13 @@ curl -s https://get.sdkman.io | bash
 sdk install java
 ```
 
-- cmake
+## cmake
 ```
 brew install cmake
+```
+
+## deno
+- https://deno.land/
+```
+curl -fsSL https://deno.land/x/install/install.sh | sh
 ```

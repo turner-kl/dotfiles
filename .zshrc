@@ -1,6 +1,13 @@
 # brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
+# wabt
+export PATH="$HOME/.wabt/bin:$PATH"
+
+# deno
+export DENO_INSTALL="/Users/ryo/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 # anyenv
 eval "$(anyenv init -)"
 
