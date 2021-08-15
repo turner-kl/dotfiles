@@ -66,7 +66,7 @@ brew install tmux
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
 
-## Anyenv
+## anyenv
 ```
 brew install anyenv
 mkdir -p $(anyenv root)/plugins
@@ -93,6 +93,11 @@ typescript
 tsnode
 typesync
 ``` 
+- update list
+```
+cd ~/.nodenv/plugins/node-build //場所は適宜変更
+git pull
+```
 
 ### Python
 ```
