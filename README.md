@@ -99,6 +99,11 @@ cd ~/.nodenv/plugins/node-build //場所は適宜変更
 git pull
 ```
 
+- npmでグローバルインストールしたとき
+```
+nodenv rehash
+```
+
 ### Python
 ```
 anyenv install pyenv
