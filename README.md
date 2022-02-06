@@ -47,6 +47,16 @@ https://qiita.com/kenchan1193/items/74edfc67910b51469b45
 - Windows 10 用 Windows Subsystem for Linux のインストール ガイド  
 https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
 
+## peco
+```
+brew install peco
+```
+
+## ghq 
+```
+brew install ghq
+``` 
+
 ## GitHub設定
 - SSH設定
 
@@ -66,56 +76,16 @@ brew install tmux
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
 
-## anyenv
+## asdf
 ```
-brew install anyenv
-mkdir -p $(anyenv root)/plugins
-git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+brew install asdf
 ```
 
 ### Node.js
 - Node.js
 ```
-anyenv install nodenv
-nodenv install 14.4.0
-nodenv global 14.4.0
-```
-
-- default packages  
-```
-mkdir -p "$(nodenv root)"/plugins
-git clone https://github.com/nodenv/nodenv-default-packages.git "$(nodenv root)/plugins/nodenv-default-packages"
-touch $(nodenv root)/default-packages
-```
-```
-yarn
-typescript
-tsnode
-typesync
-``` 
-- update list
-```
-cd ~/.nodenv/plugins/node-build //場所は適宜変更
-git pull
-```
-
-- npmでグローバルインストールしたとき
-```
-nodenv rehash
-```
-
-### Python
-```
-anyenv install pyenv
-pyenv install -l # インストール可能なリスト
-pyenv install 3.9.0
-pyenv global 3.9.0
-```
-
-- default packages  
-```
-git clone https://github.com/jawshooah/pyenv-default-packages.git $(pyenv root)/plugins/pyenv-default-packages
-vim $(pyenv root)/default-packages
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs 16.6.2
 ```
 
 ## AWS CLI
@@ -128,6 +98,8 @@ pip install aws-sam-cli
 ```
 git config --global user.email "sample@email.com"
 git config --global user.name "turner-kl"
+git config --global ghq.root '~/workspace'
+git config --global alias.co checkout
 ```
 
 ## git-secrets
