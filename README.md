@@ -93,7 +93,11 @@ brew install asdf
 - Node.js
 ```
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs 16.6.2
+asdf install nodejs latest
+
+# yarn
+corepack enable
+asdf reshim nodejs
 ```
 
 ## AWS CLI
