@@ -47,6 +47,16 @@ https://qiita.com/kenchan1193/items/74edfc67910b51469b45
 - Windows 10 用 Windows Subsystem for Linux のインストール ガイド  
 https://docs.microsoft.com/ja-jp/windows/wsl/install-win10
 
+## peco
+```
+brew install peco
+```
+
+## ghq 
+```
+brew install ghq
+``` 
+
 ## GitHub設定
 - SSH設定
 
@@ -57,62 +67,39 @@ https://qiita.com/mtsgi/items/8a844870f30b30ef21e4
 - Windows TerminalでWSLのデフォルトのディレクトリを設定する   
 https://qiita.com/kuangyujing/items/08d0fb01732bf67b8704
 
+## tmux
+```
+brew install tmux
+```
 
 ## Docker
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
 
-## Node.js
-- nodenv
+## asdf
 ```
-brew install anyenv
-anyenv install nodenv
+brew install asdf
 ```
 
-- default packages  
-npm インストール時にデフォルトでインストールするパッケージを指定  
-```
-mkdir -p $(anyenv root)/plugins
-git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-mkdir -p "$(nodenv root)"/plugins
-git clone https://github.com/nodenv/nodenv-default-packages.git "$(nodenv root)/plugins/nodenv-default-packages"
-touch $(nodenv root)/default-packages
-```
-
-- default-packagesの中身は下記
-```
-yarn
-typescript
-tsnode
-typesync
-``` 
-
+### Node.js
 - Node.js
 ```
-nodenv install 14.4.0
-nodenv global 14.4.0
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs 16.6.2
 ```
 
-## Python
+## AWS CLI
 ```
-anyenv install pyenv
-sudo apt-get install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev
-sudo apt-get install libffi-dev
-pyenv install -l
-pyenv install 3.9.0
-pyenv global 3.9.0
-```
-
-## aws-cli
-```
-pip install awscli --upgrade
-pip install aws-sam-cli
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
 ```
 
 ## Git
 ```
 git config --global user.email "sample@email.com"
 git config --global user.name "turner-kl"
+git config --global ghq.root '~/workspace'
+git config --global alias.co checkout
 ```
 
 ## git-secrets
@@ -137,4 +124,15 @@ curl -s https://get.sdkman.io | bash
 - java 
 ```
 sdk install java
+```
+
+## cmake
+```
+brew install cmake
+```
+
+## deno
+- https://deno.land/
+```
+curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
