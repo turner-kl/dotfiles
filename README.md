@@ -1,5 +1,5 @@
 # dotfile使い方
-- dotfilesの.zshrcにシンボリックリンクを貼る 
+- シンボリックリンク 
 ```
 ln -s ~/workspace/dotfiles/.zshrc ~/.zshrc
 ```
@@ -18,7 +18,7 @@ https://github.com/sorin-ionescu/prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 ```
 
-2. Create a new Zsh configuration by copying the Zsh configuration files provided:
+2. 下記を実行する
 ```
 setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
@@ -28,15 +28,20 @@ done
 
 3. vim ~/.zpreztorc
 ```
-zstyle ':prezto:module:prompt' theme 'pure'
-```
-あるいはリンク
-```
-ln -s ~/workspace/dotfiles/.zpreztorc ~
+ln -s $(pwd)/.zpreztorc ~/.zpreztorc
 ```
 
 # Mac環境構築  
-1.Homebrewをインストール  
+1. Homebrewをインストール  
+2. Preztoをインストール
+3. ターミナルの設定をProに変更し、フォントサイズを16にする
+4. GitHubを設定する
+5. 各ツールをインストールしていく
+6. リンク設定
+- `ln -s $(pwd)/.zshrc ~/.zshrc`
+- `ln -s $(pwd)/.zprofile ~/.zprofile`
+- `ln -s $(pwd)/.vimrc ~/.vimrc`
+- `ln -s $(pwd)/.tmux.conf ~/.tmux.conf`
 
 # Windows環境構築
 dotfileのシンボリックリンクを設定する前に、zpreztoを設定する。
@@ -72,6 +77,9 @@ https://qiita.com/kuangyujing/items/08d0fb01732bf67b8704
 brew install tmux
 ```
 
+## vim
+https://github.com/Shougo/neobundle.vim
+
 ## Docker
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
@@ -89,6 +97,7 @@ asdf install nodejs 16.6.2
 ```
 
 ## AWS CLI
+https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html
 ```
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
@@ -100,6 +109,8 @@ git config --global user.email "sample@email.com"
 git config --global user.name "turner-kl"
 git config --global ghq.root '~/workspace'
 git config --global alias.co checkout
+git config --global alias.cm commit
+git config --global alias.sw swtich
 ```
 
 ## git-secrets
