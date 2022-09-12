@@ -71,6 +71,17 @@ bindkey '^G' peco-src
 # branch
 alias -g lb='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
+# aws cli profile
+function peco-aws-profile() {
+   PROFILES=$(aws configure list-profiles)
+   PROFILES_ARRAY=($(echo $PROFILES))
+   SELECTED_PROFILE=$(echo $PROFILES | peco)
+
+   [[ -n ${PROFILES_ARRAY[(re)${SELECTED_PROFILE}]} ]] && export AWS_PROFILE=${SELECTED_PROFILE}; echo 'Updated profile' || echo ''
+}
+zle -N peco-aws-profile
+bindkey '^A' peco-aws-profile
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
