@@ -100,6 +100,22 @@ corepack enable
 asdf reshim nodejs
 ```
 
+### Python
+- Python
+```
+asdf plugin add python
+asdf install python latest
+asdf global python latest
+```
+
+- poetry
+```
+asdf plugin add poetry
+asdf install poetry latest
+asdf global poetry latest
+```
+
+
 ## AWS CLI
 https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html
 ```
