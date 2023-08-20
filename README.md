@@ -134,6 +134,13 @@ git config --global alias.cm commit
 git config --global alias.sw swtich
 ```
 
+### Ignore global
+/.config/git/ignore
+```
+.vscode
+.DS_Store
+```
+
 ## git-secrets
 ```
 brew install git-secrets
