@@ -8,6 +8,12 @@ export PATH="$HOME/.wabt/bin:$PATH"
 export DENO_INSTALL="/Users/ryo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+# go
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+# istioctl
+export PATH="/Users/$USER/istio-1.19.3/bin:$PATH"
+
 # asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
 th=(${ASDF_DIR}/completions $fpath)
