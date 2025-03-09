@@ -36,3 +36,4 @@
 ###### final not ignore list ######
 !.gitignore
 !.gitkeep
+!.gitconfig
