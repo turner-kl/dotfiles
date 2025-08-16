@@ -74,7 +74,6 @@ brew install peco
 brew install ghq
 brew install tmux
 brew install cmake
-brew install asdf
 brew install kubectl
 brew install kind
 ```

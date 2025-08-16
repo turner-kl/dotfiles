@@ -14,11 +14,6 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 # istioctl
 export PATH="/Users/$USER/istio-1.19.3/bin:$PATH"
 
-# asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
-th=(${ASDF_DIR}/completions $fpath)
-autoload -Uz compinit && compinit
-
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
