@@ -4,6 +4,7 @@
 
 ### Mac
 1. Homebrewをインストール  
+- `ln -s $(pwd)/.Brewfile ~/.Brewfile`
 2. Preztoをインストール
 3. ターミナルの設定をProに変更し、フォントサイズを16にする
 4. GitHubを設定する
@@ -13,6 +14,9 @@
 - `ln -s $(pwd)/.zprofile ~/.zprofile`
 - `ln -s $(pwd)/.vimrc ~/.vimrc`
 - `ln -s $(pwd)/.tmux.conf ~/.tmux.conf`
+- `ln -s $(pwd)/.gitconfig ~/.gitconfig`
+- `ln -s $(pwd)/mise.toml ~/.config/mise/config.toml`
+- `ln -s $(pwd)/.gitignore-global ~/.config/git/ignore`
 
 ### Windows
 - dotfileのシンボリックリンクを設定する前に、zpreztoを設定する
@@ -36,6 +40,7 @@ https://qiita.com/kuangyujing/items/08d0fb01732bf67b8704
 - シンボリックリンクを貼る
 ```
 ln -s ~/workspace/dotfiles/.zshrc ~/.zshrc
+
 ```
 
 - 削除する
@@ -69,24 +74,19 @@ ln -s $(pwd)/.zpreztorc ~/.zpreztorc
 https://github.com/Shougo/neobundle.vim
 
 #### その他
+- brewでインストールするツール
 ```
-brew install peco
-brew install ghq
-brew install tmux
-brew install cmake
-brew install kubectl
-brew install kind
+brew bundle
+```
+
+- miseでインストールするツール
+```
+mise install
 ```
 
 ### Docker
 - Windows 10 Home で WSL 2 + Docker を使う  
 https://qiita.com/KoKeCross/items/a6365af2594a102a817b
-
-
-### Protocol Buffers
-```
- brew install protobuf
-```
 
 ### istioctl
 ```
@@ -113,26 +113,8 @@ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 ```
 
-### Git
-```
-git config --global user.email "sample@email.com"
-git config --global user.name "turner-kl"
-git config --global ghq.root '~/workspace'
-git config --global alias.co checkout
-git config --global alias.cm commit
-git config --global alias.sw swtich
-```
-
-#### Ignore global
-/.config/git/ignore
-```
-.vscode
-.DS_Store
-```
-
 #### git-secrets
 ```
-brew install git-secrets
 git secrets --register-aws --global
 git secrets --install ~/.git-templates/git-secrets
 git config --global init.templatedir '~/.git-templates/git-secrets'
@@ -148,48 +130,11 @@ sudo apt install zip
 ### Node.js
 #### Node.js
 ```
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
+mise use --global node@22
 ```
-
-#### yarn
-```
-corepack enable
-asdf reshim nodejs
-```
-
-#### deno
-- https://deno.land/
-
 
 ### Python
 #### Python
 ```
-asdf plugin add python
-asdf install python latest
-asdf global python latest
-```
-
-#### poetry
-```
-asdf plugin add poetry
-asdf install poetry latest
-asdf global poetry latest
-poetry config virtualenvs.in-project true
-```
-
-### Go
-```
-brew install go
-```
-
-### Java
-#### sdkman
-```
-curl -s https://get.sdkman.io | bash
-```
-
-#### java 
-```
-sdk install java
+mise use -g python@3
 ```

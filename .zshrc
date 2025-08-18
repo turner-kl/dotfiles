@@ -1,6 +1,9 @@
 # brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
+# mise
+eval "$(mise activate zsh)"
+
 # wabt
 export PATH="$HOME/.wabt/bin:$PATH"
 
