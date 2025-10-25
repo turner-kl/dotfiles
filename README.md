@@ -17,6 +17,7 @@
 - `ln -s $(pwd)/.gitconfig ~/.gitconfig`
 - `ln -s $(pwd)/mise.toml ~/.config/mise/config.toml`
 - `ln -s $(pwd)/.gitignore-global ~/.config/git/ignore`
+- `ln -s $(pwd)/claude/settings.json ~/.claude/settings.json`
 
 ### Windows
 - dotfileのシンボリックリンクを設定する前に、zpreztoを設定する
