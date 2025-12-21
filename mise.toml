@@ -1,6 +1,6 @@
 [tools]
-go = "1.21"
 node = "latest"
+deno = "latest"
 python = "3"
 uv = "latest"
-deno = "latest"
+go = "1.21"

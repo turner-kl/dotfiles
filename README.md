@@ -15,9 +15,14 @@
 - `ln -s $(pwd)/.vimrc ~/.vimrc`
 - `ln -s $(pwd)/.tmux.conf ~/.tmux.conf`
 - `ln -s $(pwd)/.gitconfig ~/.gitconfig`
-- `ln -s $(pwd)/mise.toml ~/.config/mise/config.toml`
 - `ln -s $(pwd)/.gitignore-global ~/.config/git/ignore`
+- `ln -s $(pwd)/mise.toml ~/.config/mise/config.toml`
+- `ln -s $(pwd)/claude/CLAUDE.md ~/.claude/CLAUDE.md`
 - `ln -s $(pwd)/claude/settings.json ~/.claude/settings.json`
+- `ln -s $(pwd)/claude/skills ~/.claude/skills`
+将来的に追加:
+- `ln -s $(pwd)/claude/commands ~/.claude/commands`
+- `ln -s $(pwd)/claude/hooks ~/.claude/hooks`
 
 ### Windows
 - dotfileのシンボリックリンクを設定する前に、zpreztoを設定する
@@ -131,7 +136,7 @@ sudo apt install zip
 ### Node.js
 #### Node.js
 ```
-mise use --global node@22
+mise use --g node@22
 ```
 
 ### Python

@@ -1,3 +1,5 @@
 .vscode
 .DS_Store
+.memo/
+*.memo.md
 **/.claude/settings.local.json

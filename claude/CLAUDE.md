@@ -1,0 +1,1 @@
+Think in English. Respond in Japanese. Keep code and technical terms in their original language.

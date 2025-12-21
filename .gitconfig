@@ -18,7 +18,6 @@
     defaultBranch = main
 [core]
     editor = code --wait
-    excludesfile = ~/.gitignore
 
 # https://blog.gitbutler.com/how-git-core-devs-configure-git/
 [column]

@@ -26,7 +26,8 @@ fi
 alias ll='ls -al'
 alias g='git'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|build|dist|cache|coverage|\.nyc_output|vendor\/bundle" -N'
-alias awsmfa='sh ~/.scripts/aws-mfa.sh'
+alias cc='claude'
+alias ccy='claude --dangerously-skip-permissions'
 
 # tmux
 alias ide='sh ~/.scripts/ide.sh'
