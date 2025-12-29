@@ -17,6 +17,7 @@
 - `ln -s $(pwd)/.gitconfig ~/.gitconfig`
 - `ln -s $(pwd)/.gitignore-global ~/.config/git/ignore`
 - `ln -s $(pwd)/mise.toml ~/.config/mise/config.toml`
+- `ln -s $(pwd)/ghostty/config ~/Library/Application\ Support/com.mitchellh.ghostty/config`
 - `ln -s $(pwd)/claude/CLAUDE.md ~/.claude/CLAUDE.md`
 - `ln -s $(pwd)/claude/settings.json ~/.claude/settings.json`
 - `ln -s $(pwd)/claude/skills ~/.claude/skills`
