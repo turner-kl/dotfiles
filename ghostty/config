@@ -52,5 +52,5 @@
 ### 設定 ###
 
 # theme, font
-theme = TokyoNight
-font-size = 20
+# theme = TokyoNight
+font-size = 16

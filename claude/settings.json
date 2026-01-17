@@ -5,7 +5,8 @@
     "type": "command",
     "command": "echo \"[$(basename $(git rev-parse --show-toplevel 2>/dev/null) 2>/dev/null):$(git branch --show-current 2>/dev/null)] $(npx ccusage statusline 2>/dev/null || echo '')\""
   },
-  "alwaysThinkingEnabled": true,
+  "language": "japanese",
+  "alwaysThinkingEnabled": false,
   "permissions": {
     "allow": [
       "Bash(git add:*)",
@@ -20,6 +21,6 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
-    "excludedCommands": ["git"]
+    "excludedCommands": ["git", "agent-browser"]
   }
 }
