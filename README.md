@@ -21,6 +21,7 @@
 - `ln -s $(pwd)/claude/CLAUDE.md ~/.claude/CLAUDE.md`
 - `ln -s $(pwd)/claude/settings.json ~/.claude/settings.json`
 - `ln -s $(pwd)/claude/skills ~/.claude/skills`
+- `ln -s $(pwd)/claude/statusline.sh ~/.claude/statusline.sh`
 将来的に追加:
 - `ln -s $(pwd)/claude/commands ~/.claude/commands`
 - `ln -s $(pwd)/claude/hooks ~/.claude/hooks`

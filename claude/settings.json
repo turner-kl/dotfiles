@@ -1,26 +1,44 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "echo \"[$(basename $(git rev-parse --show-toplevel 2>/dev/null) 2>/dev/null):$(git branch --show-current 2>/dev/null)] $(npx ccusage statusline 2>/dev/null || echo '')\""
-  },
-  "language": "japanese",
-  "alwaysThinkingEnabled": false,
   "permissions": {
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch",
+      "WebSearch"
     ]
   },
-  "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true,
-    "typescript-lsp@claude-plugins-official": true
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "Notion@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "document-skills@anthropic-agent-skills": true
+  },
+  "language": "japanese",
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
-    "excludedCommands": ["git", "agent-browser"]
-  }
+    "excludedCommands": [
+      "git",
+      "agent-browser"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }
