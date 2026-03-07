@@ -4,7 +4,6 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)",
       "WebFetch",
       "WebSearch"
     ]
@@ -20,12 +19,10 @@
     "context7@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
     "plugin-dev@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "document-skills@anthropic-agent-skills": true
@@ -35,10 +32,14 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
     "excludedCommands": [
-      "git",
-      "agent-browser"
+      "agent-browser:*",
+      "docker:*",
+      "gh:*",
+      "git:*",
+      "pnpm:*"
     ]
   },
   "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
 }

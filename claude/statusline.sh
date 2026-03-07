@@ -54,28 +54,41 @@ format_rate() {
   fi
 }
 
+USAGE_CACHE="${TMPDIR:-/tmp}/claude-usage-cache.json"
+CACHE_TTL=60
+
 five_hour=""
 weekly=""
-creds=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
-if [ -n "$creds" ]; then
-  # jq fails when macOS `security -w` truncates long credentials (>2KB),
-  # so extract the token with grep instead
+now_epoch=$(date +%s)
+cache_age=$((now_epoch + 1))
+if [ -f "$USAGE_CACHE" ]; then
+  cache_mtime=$(stat -f %m "$USAGE_CACHE" 2>/dev/null)
+  [ -n "$cache_mtime" ] && cache_age=$((now_epoch - cache_mtime))
+fi
+
+if [ "$cache_age" -ge "$CACHE_TTL" ]; then
+  creds=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
   token=$(echo "$creds" | grep -o '"accessToken":"[^"]*"' | head -1 | sed 's/"accessToken":"//;s/"$//')
   if [ -n "$token" ]; then
-    api_usage=$(curl -s --max-time 1 "https://api.anthropic.com/api/oauth/usage" \
+    fresh=$(curl -s --max-time 1 "https://api.anthropic.com/api/oauth/usage" \
       -H "Authorization: Bearer $token" \
       -H "anthropic-beta: oauth-2025-04-20" 2>/dev/null)
-    now_epoch=$(date +%s)
-
-    five_hour=$(format_rate "5h" \
-      "$(echo "$api_usage" | jq -r '.five_hour.utilization // empty' 2>/dev/null)" \
-      "$(echo "$api_usage" | jq -r '.five_hour.resets_at // empty' 2>/dev/null)" \
-      "$now_epoch")
-    weekly=$(format_rate "7d" \
-      "$(echo "$api_usage" | jq -r '.seven_day.utilization // empty' 2>/dev/null)" \
-      "$(echo "$api_usage" | jq -r '.seven_day.resets_at // empty' 2>/dev/null)" \
-      "$now_epoch")
+    if [ -n "$fresh" ] && echo "$fresh" | grep -q '"five_hour"'; then
+      echo "$fresh" > "$USAGE_CACHE"
+    fi
   fi
+fi
+
+api_usage=$(cat "$USAGE_CACHE" 2>/dev/null)
+if [ -n "$api_usage" ]; then
+  IFS=$'\t' read -r fh_util fh_reset sd_util sd_reset <<< "$(echo "$api_usage" | jq -r '[
+    (.five_hour.utilization // empty | tostring),
+    (.five_hour.resets_at // empty),
+    (.seven_day.utilization // empty | tostring),
+    (.seven_day.resets_at // empty)
+  ] | @tsv' 2>/dev/null)"
+  five_hour=$(format_rate "5h" "$fh_util" "$fh_reset" "$now_epoch")
+  weekly=$(format_rate "7d" "$sd_util" "$sd_reset" "$now_epoch")
 fi
 
 # --- Output ---
