@@ -20,41 +20,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - コマンド: `mise install`
    - 管理対象: Go, Node.js, Python, uv, Deno
 
-## セットアップ手順の順序
-
-Mac環境の場合、以下の順序でセットアップを行う必要があります:
-
-1. Homebrewをインストール → .Brewfileをリンク
-2. Prezto(zshフレームワーク)をインストール
-   - **注意**: dotfilesをリンクする前に実行する必要がある
-   - 理由: Preztoのセットアップスクリプトは既存のzshrcファイルがあるとエラーになる
-3. 各種設定ファイルをシンボリックリンク
-4. miseでプログラミング言語をインストール
-
-## 重要な依存関係
-
-### Preztoのセットアップ
-```bash
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-ln -s $(pwd)/.zpreztorc ~/.zpreztorc
-```
-
-### git-secretsの設定
-AWS関連の機密情報を誤ってコミットしないための設定:
-```bash
-git secrets --register-aws --global
-git secrets --install ~/.git-templates/git-secrets
-git config --global init.templatedir '~/.git-templates/git-secrets'
-```
 
 ## 主要な設定ファイル
 
 - `.zshrc`: シェルの基本設定
-- `.zpreztorc`: Preztoのモジュール設定
 - `.vimrc`: Vim設定(NeoBundle使用)
 - `.tmux.conf`: ターミナルマルチプレクサ設定
 - `.gitconfig`: Git全体設定
@@ -66,5 +35,4 @@ git config --global init.templatedir '~/.git-templates/git-secrets'
 ## プラットフォーム固有の注意事項
 
 ### Windows/WSL2
-- dotfilesのシンボリックリンク設定前にzpreztoを先にセットアップする
 - Windows Terminalのデフォルトディレクトリ設定が必要な場合がある

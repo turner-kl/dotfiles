@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
@@ -17,11 +19,6 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 # istioctl
 export PATH="/Users/$USER/istio-1.19.3/bin:$PATH"
 
-# Source Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # Claude Code
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -29,8 +26,8 @@ export PATH="$HOME/.local/bin:$PATH"
 alias ll='ls -al'
 alias g='git'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|build|dist|cache|coverage|\.nyc_output|vendor\/bundle" -N'
-alias cc='claude'
-alias ccy='claude --dangerously-skip-permissions'
+alias cl='claude'
+alias cly='claude --dangerously-skip-permissions'
 
 # tmux
 alias ide='sh ~/.scripts/ide.sh'
@@ -96,3 +93,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
