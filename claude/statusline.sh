@@ -30,23 +30,19 @@ colorize() {
 ctx_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
 ctx_display=$(colorize "$ctx_pct")
 
-# --- Rate Limit ---
+# --- Rate Limit (from stdin JSON since v2.1.80) ---
 calc_remaining() {
-  local ra=$1 now=$2
-  if [ -n "$ra" ] && [ "$ra" != "null" ]; then
-    local dt=$(echo "$ra" | sed 's/\.[0-9]*+.*//')
-    local ep=$(TZ=UTC date -j -f "%Y-%m-%dT%H:%M:%S" "$dt" +%s 2>/dev/null)
-    if [ -n "$ep" ] && [ "$ep" -gt "$now" ]; then
-      local sec=$((ep - now))
-      echo "$((sec / 3600))h$(((sec % 3600) / 60))m"
-    fi
+  local ep=$1 now=$2
+  if [ -n "$ep" ] && [ "$ep" != "null" ] && [ "$ep" -gt "$now" ] 2>/dev/null; then
+    local sec=$((ep - now))
+    echo "$((sec / 3600))h$(((sec % 3600) / 60))m"
   fi
 }
 
 format_rate() {
-  local label=$1 util=$2 reset=$3 now=$4
-  if [ -n "$util" ] && [ "$util" != "null" ]; then
-    local pct=$(printf "%.0f" "$util")
+  local label=$1 pct_raw=$2 reset=$3 now=$4
+  if [ -n "$pct_raw" ] && [ "$pct_raw" != "null" ]; then
+    local pct=$(printf "%.0f" "$pct_raw")
     local result="${label}: $(colorize "$pct")"
     local rem=$(calc_remaining "$reset" "$now")
     [ -n "$rem" ] && result="${result}(${rem})"
@@ -54,42 +50,15 @@ format_rate() {
   fi
 }
 
-USAGE_CACHE="${TMPDIR:-/tmp}/claude-usage-cache.json"
-CACHE_TTL=60
-
-five_hour=""
-weekly=""
 now_epoch=$(date +%s)
-cache_age=$((now_epoch + 1))
-if [ -f "$USAGE_CACHE" ]; then
-  cache_mtime=$(stat -f %m "$USAGE_CACHE" 2>/dev/null)
-  [ -n "$cache_mtime" ] && cache_age=$((now_epoch - cache_mtime))
-fi
-
-if [ "$cache_age" -ge "$CACHE_TTL" ]; then
-  creds=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
-  token=$(echo "$creds" | grep -o '"accessToken":"[^"]*"' | head -1 | sed 's/"accessToken":"//;s/"$//')
-  if [ -n "$token" ]; then
-    fresh=$(curl -s --max-time 1 "https://api.anthropic.com/api/oauth/usage" \
-      -H "Authorization: Bearer $token" \
-      -H "anthropic-beta: oauth-2025-04-20" 2>/dev/null)
-    if [ -n "$fresh" ] && echo "$fresh" | grep -q '"five_hour"'; then
-      echo "$fresh" > "$USAGE_CACHE"
-    fi
-  fi
-fi
-
-api_usage=$(cat "$USAGE_CACHE" 2>/dev/null)
-if [ -n "$api_usage" ]; then
-  IFS=$'\t' read -r fh_util fh_reset sd_util sd_reset <<< "$(echo "$api_usage" | jq -r '[
-    (.five_hour.utilization // empty | tostring),
-    (.five_hour.resets_at // empty),
-    (.seven_day.utilization // empty | tostring),
-    (.seven_day.resets_at // empty)
-  ] | @tsv' 2>/dev/null)"
-  five_hour=$(format_rate "5h" "$fh_util" "$fh_reset" "$now_epoch")
-  weekly=$(format_rate "7d" "$sd_util" "$sd_reset" "$now_epoch")
-fi
+IFS=$'\t' read -r fh_pct fh_reset sd_pct sd_reset <<< "$(echo "$input" | jq -r '[
+  (.rate_limits.five_hour.used_percentage // empty | tostring),
+  (.rate_limits.five_hour.resets_at // empty),
+  (.rate_limits.seven_day.used_percentage // empty | tostring),
+  (.rate_limits.seven_day.resets_at // empty)
+] | @tsv' 2>/dev/null)"
+five_hour=$(format_rate "5h" "$fh_pct" "$fh_reset" "$now_epoch")
+weekly=$(format_rate "7d" "$sd_pct" "$sd_reset" "$now_epoch")
 
 # --- Output ---
 printf "%b\n" "${header} | ${MODEL}"
