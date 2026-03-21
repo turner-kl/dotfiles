@@ -1,3 +1,4 @@
 font-size = 16
 font-family = JetBrains Mono NL
 font-feature = -dlig
+font-codepoint-map = U+3000-U+9FFF,U+FF00-U+FFEF=Hiragino Sans

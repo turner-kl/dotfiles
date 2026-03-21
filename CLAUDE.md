@@ -9,30 +9,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## アーキテクチャ
 
 ### シンボリックリンク方式
-設定ファイルはリポジトリ内で管理し、ホームディレクトリへシンボリックリンクを張る方式を採用しています:
+**このリポジトリが設定ファイルの実体**であり、ホームディレクトリ側はシンボリックリンクです。設定ファイルの編集は必ずこのリポジトリ内で行います:
 - `ln -s $(pwd)/[設定ファイル] ~/[リンク先]`
 - 削除時: `unlink ~/[リンク先]`
 
-### パッケージ管理の階層
-1. **Homebrew** (.Brewfile): システムレベルのツールとアプリケーション
-   - コマンド: `brew bundle`
-2. **mise** (mise.toml): プログラミング言語のバージョン管理
-   - コマンド: `mise install`
-   - 管理対象: Go, Node.js, Python, uv, Deno
-
-
-## 主要な設定ファイル
-
-- `.zshrc`: シェルの基本設定
-- `.vimrc`: Vim設定(NeoBundle使用)
-- `.tmux.conf`: ターミナルマルチプレクサ設定
-- `.gitconfig`: Git全体設定
-- `.Brewfile`: Homebrew管理パッケージリスト
-- `mise.toml`: 言語バージョン管理設定
-- `claude/settings.json`: Claude Code設定
-- `claude/CLAUDE.md`: Claude Codeグローバル指示(個人設定)
-
-## プラットフォーム固有の注意事項
-
-### Windows/WSL2
-- Windows Terminalのデフォルトディレクトリ設定が必要な場合がある
+### 手順書
+READMEがセットアップ手順書を兼ねています。設定ファイルを追加・変更した場合はREADMEの手順も更新してください。
