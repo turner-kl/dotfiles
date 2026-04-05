@@ -6,3 +6,9 @@ disabled = true
 
 [package]
 disabled = true
+
+[deno]
+disabled = true
+
+[php]
+disabled = true
