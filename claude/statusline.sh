@@ -13,16 +13,18 @@ else
   header="$PROJECT"
 fi
 MODEL=$(echo "$input" | jq -r '.model.display_name' | sed 's/Claude //')
+EFFORT=$(echo "$input" | jq -r '.effort.level // empty')
+[ -n "$EFFORT" ] && MODEL="${MODEL} \033[2m${EFFORT}\033[0m"
 
 # --- Color helpers ---
 colorize() {
   local pct=$1
   if [ "$pct" -ge 80 ]; then
-    printf '\033[31m✖ %s%%\033[0m' "$pct"
+    printf '\033[31m%s%%\033[0m' "$pct"
   elif [ "$pct" -ge 50 ]; then
-    printf '\033[33m▲ %s%%\033[0m' "$pct"
+    printf '\033[33m%s%%\033[0m' "$pct"
   else
-    printf '\033[32m● %s%%\033[0m' "$pct"
+    printf '\033[32m%s%%\033[0m' "$pct"
   fi
 }
 
