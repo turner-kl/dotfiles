@@ -10,7 +10,7 @@
       "WebFetch",
       "WebSearch"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
   "model": "opus",
   "statusLine": {
@@ -44,5 +44,7 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "effortLevel": "low",
+  "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
